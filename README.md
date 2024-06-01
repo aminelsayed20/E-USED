@@ -2,6 +2,8 @@
 
 E-Used is an ASP.NET MVC application for buying and selling used items. Users can sign up or log in using email or Google accounts, add their products with images, view all available products, chat with product owners, and purchase items. The application also includes admin functionalities for filtering product content and a user dashboard to manage products and profiles.
 
+**Note: This project is currently under implementation and is not yet complete.**
+
 ## Features
 
 - **User Authentication:** Sign up and log in using email (with email confirmation) or Google accounts via ASP.NET Identity.
