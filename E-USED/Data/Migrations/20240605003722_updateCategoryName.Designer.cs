@@ -4,6 +4,7 @@ using E_USED.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace E_USED.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240605003722_updateCategoryName")]
+    partial class updateCategoryName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,7 +52,7 @@ namespace E_USED.Data.Migrations
 
                     b.HasIndex("User2Id");
 
-                    b.ToTable("chats", (string)null);
+                    b.ToTable("chats");
                 });
 
             modelBuilder.Entity("E_USED.Models.Entity.Chat.Message", b =>
@@ -79,7 +82,7 @@ namespace E_USED.Data.Migrations
 
                     b.HasIndex("SenderId");
 
-                    b.ToTable("Message", (string)null);
+                    b.ToTable("Message");
                 });
 
             modelBuilder.Entity("E_USED.Models.Entity.City", b =>
@@ -96,7 +99,7 @@ namespace E_USED.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("cities", (string)null);
+                    b.ToTable("cities");
                 });
 
             modelBuilder.Entity("E_USED.Models.Entity.Product.Category", b =>
@@ -113,7 +116,7 @@ namespace E_USED.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("categories", (string)null);
+                    b.ToTable("categories");
                 });
 
             modelBuilder.Entity("E_USED.Models.Entity.Product.Product", b =>
@@ -152,7 +155,7 @@ namespace E_USED.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("products", (string)null);
+                    b.ToTable("products");
                 });
 
             modelBuilder.Entity("E_USED.Models.Entity.Product.ProductImage", b =>
@@ -173,7 +176,7 @@ namespace E_USED.Data.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductImage", (string)null);
+                    b.ToTable("ProductImage");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
