@@ -14,28 +14,33 @@ namespace E_USED.Data
         {
         }
 
-        public DbSet<AppUser> users { get; set; }
-        public DbSet<Product> products { get; set; }
-        public DbSet<Chat> chats { get; set; }
-        public DbSet<City> cities { get; set; }
-        public DbSet<Category> catigories { get; set; }
+        public DbSet<AppUser> Users { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Chat> Chats { get; set; }
+        public DbSet<City> Cities { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<ConnectionUser> ConnectionUsers { get; set; }
+        public DbSet<UserMessage> userMessages { get; set; }
 
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Chat>()
-                .HasOne(c => c.User1)
-                .WithMany()
-                .HasForeignKey(c => c.User1Id)
-                .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<Chat>()
-                .HasOne(c => c.User2)
-                .WithMany()
-                .HasForeignKey(c => c.User2Id)
-                .OnDelete(DeleteBehavior.Restrict);
-            
-        }
+			/*
+						modelBuilder.Entity<Chat>()
+							.HasOne(c => c.User1)
+							.WithMany()
+							.HasForeignKey(c => c.User1Id)
+							.OnDelete(DeleteBehavior.Restrict);
+
+						modelBuilder.Entity<Chat>()
+							.HasOne(c => c.User2)
+							.WithMany()
+							.HasForeignKey(c => c.User2Id)
+							.OnDelete(DeleteBehavior.Restrict);*/
+
+		}
     }
 }

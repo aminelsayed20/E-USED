@@ -1,0 +1,62 @@
+﻿@model E_USED.Dtos.FilterProductModel
+
+<!-- header section start -->
+<div class="header_section ">
+    <div class="container">
+        <div class="containt_main">
+
+
+            <div class="btn btn-dark">
+                <a class="toggle_icon col" asp-area="" asp-controller="Products" asp-action="Create"><i class="bi bi-plus-square-fill col-12  "> Sell</i></a>
+            </div>
+
+
+            <div class="dropdown col-2">
+
+                <select class="form-select " asp-for="CategoryId" aria-label="Default select example"
+                        asp-items="@(new SelectList(ViewBag.Categories, "Id", "Name"))">
+                    <option selected>Category</option>
+                </select>
+
+            </div>
+            <div class="main ">
+                <!-- Another variation with a button -->
+                <div class="input-group ">
+                    <input type="text" class="form-control " placeholder="Search this blog">
+                    <div class="input-group-append">
+                        <button class="btn btn-secondary" type="button" style="background-color: #f26522; border-color:#f26522 ">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="header_box">
+                <div class="dropdown">
+                    <select class="form-select " asp-for="CityId" aria-label="Default select example"
+                            asp-items="@(new SelectList(ViewBag.Cities, "Id", "Name"))">
+                        <option selected>City</option>
+                    </select>
+                </div>
+
+                @* <div class="login_menu">
+                <ul>
+                <li>
+                <a href="#">
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                <span class="padding_10">Cart</span>
+                </a>
+                </li>
+                <li>
+                <a href="#">
+                <i class="fa fa-user" aria-hidden="true"></i>
+                <span class="padding_10">Cart</span>
+                </a>
+                </li>
+                </ul>
+                </div> *@
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- header section end -->

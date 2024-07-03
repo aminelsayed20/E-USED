@@ -7,7 +7,7 @@ namespace E_USED.Data
     {
         public static async Task SeedAsync(ApplicationDbContext context)
         {
-            if (!context.cities.Any())
+            if (!context.Cities.Any())
             {
                 var cities = new List<City>
             {
@@ -31,10 +31,10 @@ namespace E_USED.Data
                 new City { Name = "Zagazig"},
                 new City { Name = "Hurghada"}
             };
-                context.cities.AddRange(cities);
+                context.Cities.AddRange(cities);
             }
 
-            if (!context.catigories.Any())
+            if (!context.Categories.Any())
             {
                 var categories = new List<Category>
             {
@@ -51,7 +51,7 @@ namespace E_USED.Data
                 new Category {Name = "Jobs and Services"},
                 new Category {Name = "Business and Industrial"}
             };
-                context.catigories.AddRange(categories);
+                context.Categories.AddRange(categories);
             }
 
             if (context.ChangeTracker.HasChanges())
@@ -62,7 +62,7 @@ namespace E_USED.Data
     }
 }
 /*
- * cities
+ * Cities
         Cairo,
         Giza,
         Alexandria,
@@ -85,7 +85,7 @@ namespace E_USED.Data
         Hurghada 
 */
 /*
- * categories
+ * Categories
         Vehicles,
         Properties ,
         MobilesAndAccessories,

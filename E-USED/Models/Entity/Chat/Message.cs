@@ -1,4 +1,4 @@
-﻿using E_USED.Repository;
+﻿using E_USED.Repository.Interfaces;
 using SellingUsedThings.Models.Entity;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -11,12 +11,10 @@ namespace E_USED.Models.Entity.Chat
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
 
-        [ForeignKey("User")]
-        public string SenderId { get; set; }
-        public AppUser User { get; set; } = default!;
+        public string? SenderId { get; set; }
+        public AppUser Sender { get; set; } = default!;
 
 
-        [ForeignKey("Chat")]
         public int ChatId { get; set; }
         public Chat Chat { get; set; } = default!;
 

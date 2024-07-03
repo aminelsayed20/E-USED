@@ -1,0 +1,64 @@
+﻿@model E_USED.Dtos.CreateProductViewModel
+
+
+
+<div class="row-cols-3 d-flex align-items-center justify-content-center">
+    <form method="post" class="form" asp-action="Create" asp-controller="Products" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="col p-2">
+            <i class="bi bi-bag-dash"></i>
+            <label for="name" asp-for="Name" class="form-label">Item Name</label>
+            <input type="text" asp-for="Name" class="form-control" placeholder="Item Name">
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="col p-2">
+            <i class="bi bi-chat-dots"></i>
+            <label for="Description" asp-for="Description" class="form-label">Description</label>
+            <textarea class="form-control" asp-for="Description" id="exampleFormControlTextarea1" rows="3" placeholder="Descrip your product"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <div class="col p-2">
+            <i class="bi bi-tag"></i>
+            <label for="Price" asp-for="Price" class="form-label">Price</label>
+            <input type="number" asp-for="Price" class="form-control" placeholder="">
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+        <div class="col p-2">
+            <div class="col ">
+                <i class="bi bi-geo-alt"></i>
+                <label for="Location" asp-for="Location" class="form-label">Location</label>
+                <input type="text" asp-for="Location" class="form-control" placeholder="The Location that you want to meet other people">
+                <span asp-validation-for="Location" class="text-danger"></span>
+            </div>
+            <div class="col py-1">
+                <select class="form-select" asp-for="CityId" aria-label="Default select example"
+                        asp-items="@(new SelectList(ViewBag.Cities, "Id", "Name"))">
+                    <option selected>City</option>
+                </select>
+                <span asp-validation-for="CityId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col p-2">
+            <i class="bi bi-bookmark-check"></i>
+            <label for="CategoryId" asp-for="CategoryId" class="form-label"></label>
+            <select asp-validation-for="CategoryId" class="form-select" asp-for="CategoryId" aria-label="Default select example"
+                    asp-items="@(new SelectList(ViewBag.Categories, "Id", "Name"))">
+                <option selected>Category</option>
+            </select>
+            <span asp-validation-for="CategoryId" class="text-warning"></span>
+        </div>
+
+        <div class="col p-2">
+            <div class="mb-3">
+                <i class="bi bi-images"></i>
+                <label for="formFileMultiple" asp-for="Images" class="form-label">Images</label>
+                <input class="form-control" asp-for="Images" type="file" id="formFileMultiple" multiple>
+            </div>
+        </div>
+        <div class="d-flex justify-content-end">
+            <button type="submit" class="btn btn-success col-4 ">Post Now</button>
+        </div>
+
+    </form>
+
+</div>

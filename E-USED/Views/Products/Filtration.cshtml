@@ -1,0 +1,70 @@
+﻿@using Microsoft.EntityFrameworkCore.Metadata.Internal
+@model IEnumerable<E_USED.Dtos.ProductForListDto>
+
+@* <!-- header section start -->
+<partial name="SearchHeaderPartial" />
+<!-- header section end --> *@
+
+<div class="frea-area-for-filter-page p-3 ">
+
+</div>
+
+<div class="row ">
+
+    <div class="col-4 p-5 ">
+
+        <h1> Filters</h1>
+        <hr>
+
+        <h2>Category</h2>
+        <p>All Categories</p>
+
+        <hr>
+
+        <h2>City</h2>
+        <p>Cairo</p>
+
+
+
+    </div>
+
+
+
+    <div class="container list-items">
+
+        @if (Model.Count() > 0)
+        {
+            @foreach(var item in Model)
+            {
+            <div class="card mb-3 col align-self-end" style="max-width: 840px;">
+                <div class="row g-0">
+                    <div class="col-md-4 d-flex align-items-center justify-content-center">
+                        <img src="@item.ImagePath" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h1 class="card-title text-danger">@item.Price EGP <i class="bi bi-tag"></i></h1>
+                            <h2 class="card-text ">@item.Name</h2>
+                            <p class="card-text">@item.Location, @item.City  <i class="bi bi-geo-alt"></i> </p>
+                            <p class="card-text"> @item.Time  <i class="bi bi-clock"></i></p>
+                            <div>
+                                <a class="btn btn-outline-danger px-3 mx-2" href="#"><i class="bi bi-telephone-forward"> Call</i></a>
+                                <a class="btn btn-outline-danger px-2 mx-2" href="#"><i class="bi bi-chat-dots"> Chat</i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="favorite-icon">
+                    <i class="bi bi-heart text-danger "></i>
+                </div>
+            </div>
+        }
+        }
+
+    </div>
+
+
+
+
+</div>
+

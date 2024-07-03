@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using SellingUsedThings.Models.Entity;
+using E_USED.Data;
 
 namespace E_USED.Areas.Identity.Pages.Account
 {
@@ -117,7 +118,12 @@ namespace E_USED.Areas.Identity.Pages.Account
             if (result.Succeeded)
             {
                 _logger.LogInformation("{Name} logged in with {LoginProvider} provider.", info.Principal.Identity.Name, info.LoginProvider);
-                return LocalRedirect(returnUrl);
+                
+                var user = _userManager.GetUserAsync(User).Result;
+                user.IsActive = true;
+				await _userManager.UpdateAsync(user);
+
+				return LocalRedirect(returnUrl);
             }
             if (result.IsLockedOut)
             {
@@ -175,9 +181,10 @@ namespace E_USED.Areas.Identity.Pages.Account
                             user.FirstName = firstName;
                             var LastName = info.Principal.FindFirstValue(ClaimTypes.Surname);
                             user.LastName = LastName;
+                            user.IsActive = true;
 
-                            // Update the user with additional information
-                            await _userManager.UpdateAsync(user);
+							// Update the user with additional information
+							await _userManager.UpdateAsync(user);
                         }
 
                         var userId = await _userManager.GetUserIdAsync(user);
@@ -235,5 +242,6 @@ namespace E_USED.Areas.Identity.Pages.Account
             }
             return (IUserEmailStore<AppUser>)_userStore;
         }
-    }
+
+	}
 }

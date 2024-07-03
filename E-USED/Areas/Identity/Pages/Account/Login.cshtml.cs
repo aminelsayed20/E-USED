@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using SellingUsedThings.Models.Entity;
+using E_USED.Data;
 
 namespace E_USED.Areas.Identity.Pages.Account
 {
@@ -22,11 +23,13 @@ namespace E_USED.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<AppUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
+        private readonly UserManager<AppUser> _userManager;
 
-        public LoginModel(SignInManager<AppUser> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(SignInManager<AppUser> signInManager, ILogger<LoginModel> logger, UserManager<AppUser> userManager)
         {
             _signInManager = signInManager;
             _logger = logger;
+            _userManager = userManager;
         }
 
         /// <summary>
@@ -116,6 +119,8 @@ namespace E_USED.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
+                    var user = _userManager.GetUserAsync(User).Result;
+                     await activityHandel(user);
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)
@@ -137,6 +142,15 @@ namespace E_USED.Areas.Identity.Pages.Account
 
             // If we got this far, something failed, redisplay form
             return Page();
+        }
+
+        private async Task<bool> activityHandel (AppUser user)
+        {
+            if (user == null)  return  false;
+
+            user.IsActive = true;
+			await _userManager.UpdateAsync(user);
+			return true;
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using E_USED.Models.Entity;
-using E_USED.Repository;
+using E_USED.Repository.Interfaces;
 using SellingUsedThings.Enum;
 using SellingUsedThings.Models.Entity;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -16,14 +16,15 @@ namespace E_USED.Models.Entity.Product
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
 
-        [ForeignKey("Category")]
-        public int CategoryId { get; set; }
+        public int? CategoryId { get; set; }
         public Category Category { get; set; } = default!;
 
 
+        public int? CityId { get; set; }
+        public City City { get; set; } = default!;
 
-        [ForeignKey("User")]
-        public string UserId { get; set; }
+
+        public string? UserId { get; set; }
         public AppUser User { get; set; } = default!;
 
         public ICollection<ProductImage> Images { get; set; } = new List<ProductImage>();

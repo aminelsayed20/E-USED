@@ -14,13 +14,10 @@ namespace SellingUsedThings.Models.Entity
         public string? LastName { get; set; }
         public string? ImgPath { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.Now;
-
-        [ForeignKey("City")]
-        public int CityId { get; set; }
-        public City City { get; set; } = default!;
-
         public ICollection<Product> Products { get; set; } = new List<Product>();
-        public ICollection<Chat> Chats { get; set; } = new List<Chat>();
+        public bool? IsActive { get; set; } = false;
+        public int? UnReadMessageCount { get; set; } = 0;
+        //public ICollection<Chat> Chats { get; set; } = new List<Chat>();
 
     }
 }

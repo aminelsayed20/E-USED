@@ -17,6 +17,14 @@ using E_USED.Repository;
 using E_USED.Models.Entity.Product;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.General;
 using System.Diagnostics;
+using Serilog;
+using E_USED.MidelWare;
+using E_USED.Repository.Interfaces;
+using E_USED.Repository.Services;
+using E_USED.Hubs;
+using System.Drawing.Text;
+using System;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -45,7 +53,16 @@ builder.Services.AddRazorPages(); // Add Razor Pages services
 
 // Transients
 builder.Services.AddTransient<IEmailSender, MyEmailSender>();
+
+// repositories
 builder.Services.AddTransient<IRepository<Product>, Repository<Product>>();
+builder.Services.AddTransient<IRepository<Category>, Repository<Category>>();
+builder.Services.AddTransient<IRepository<City>, Repository<City>>();
+
+
+builder.Services.AddTransient<IProductServices, ProductServices>();
+
+
 //---------------//
 
 builder.Services.AddAuthentication()
@@ -63,7 +80,26 @@ builder.Services.AddAuthentication()
         // this for maping the name-email-image form google account
     });
 
+
+builder.Host.UseSerilog((ctx, lc) => lc.ReadFrom
+.Configuration(ctx.Configuration));
+
+
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddProblemDetails();
+
+
+
+builder.Services.AddSignalR();
+
+
 var app = builder.Build();
+
+
+//app.UseExceptionHandler();
+
+app.UseSerilogRequestLogging();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -72,9 +108,9 @@ if (app.Environment.IsDevelopment())
 }
 else
 {
-    app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
 }
+
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
@@ -108,5 +144,9 @@ catch (Exception ex)
     logger.LogError(ex, "Error Migration");
 }
 
+app.MapHub<ChatHub>("/chatHub");
 
 app.Run();
+
+
+
